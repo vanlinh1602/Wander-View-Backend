@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express, { Express } from 'express';
 import morgan from 'morgan';
+import { startServer } from 'server';
 
 import setupRoutes from './routers';
 
@@ -18,6 +19,8 @@ const routes = setupRoutes();
 routes.forEach(({ path, router }) => {
   app.use(path, router);
 });
+
+startServer();
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
