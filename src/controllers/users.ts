@@ -10,6 +10,6 @@ export const getUser = async (req: Request, res: Response) => {
     res.status(200).send(userInfo);
   } else {
     await createDocData({ email, name: email }, 'users', uid);
-    res.status(200).send({ email });
+    res.status(200).send({ email, name: email });
   }
 };
