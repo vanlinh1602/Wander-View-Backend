@@ -1,5 +1,5 @@
 {
-  "name": "weather-app-backend",
+  "name": "wander-view-backend",
   "version": "1.0.0",
   "description": "",
   "main": ".eslintrc.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vanlinh1602/Weather-App-Backend.git"
+    "url": "git+https://github.com/vanlinh1602/Wander-View-Backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vanlinh1602/Weather-App-Backend/issues"
+    "url": "https://github.com/vanlinh1602/Wander-View-Backend/issues"
   },
-  "homepage": "https://github.com/vanlinh1602/Weather-App-Backend#readme",
+  "homepage": "https://github.com/vanlinh1602/Wander-View-Backend#readme",
   "dependencies": {
     "async": "^3.2.4",
     "body-parser": "^1.20.2",
