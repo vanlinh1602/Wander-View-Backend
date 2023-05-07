@@ -5,7 +5,9 @@
   "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "npm run build && node ./dist/index.js"
   },
   "repository": {
     "type": "git",
