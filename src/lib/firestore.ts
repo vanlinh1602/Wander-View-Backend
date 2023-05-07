@@ -11,6 +11,14 @@ export const getDocData = async (collection: string, doc: string): Promise<any> 
   return null;
 };
 
+export const getCollection = async (collection: string): Promise<any> => {
+  if (Firebase) {
+    const data = await Firebase.firestore().collection(collection).get();
+    return data.docs.map((doc) => doc.data());
+  }
+  return null;
+};
+
 export const queryData = async (
   collection: string,
   condition: { field: string; op: WhereFilterOp; value: string }[]
