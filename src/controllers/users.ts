@@ -55,3 +55,21 @@ export const updatePlan = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const updateUserSave = async (req: Request, res: Response) => {
+  const { data, userId } = req.body;
+
+  const updated = await updateDocData(
+    'users',
+    userId,
+    {
+      save: data,
+    },
+    { merge: true }
+  );
+  if (updated) {
+    res.send(true);
+  } else {
+    res.status(500).send('Save fail');
+  }
+};
