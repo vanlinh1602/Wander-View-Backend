@@ -1,9 +1,10 @@
 import type { Request, Response } from 'express';
-import { getCollection, getDocData, updateDocData } from 'lib/firestore';
+import { createDocData, getCollection, getDocData, updateDocData } from 'lib/firestore';
 import { getUid } from 'lib/utils';
 
 export const getLocations = async (req: Request, res: Response) => {
   const locations = await getCollection('locations');
+
   res.status(200).send(locations);
 };
 
@@ -29,6 +30,20 @@ export const addReview = async (req: Request, res: Response) => {
 
   if (created) {
     res.status(200).send(cmtId);
+  } else {
+    res.status(500).send('Add fail');
+  }
+};
+
+export const addLocation = async (req: Request, res: Response) => {
+  const { data } = req.body;
+
+  const added = await createDocData({ ...data, id: getUid() }, 'locations', data.id, {
+    merge: true,
+  });
+
+  if (added) {
+    res.send(true);
   } else {
     res.status(500).send('Add fail');
   }
