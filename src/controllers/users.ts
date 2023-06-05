@@ -73,3 +73,14 @@ export const updateUserSave = async (req: Request, res: Response) => {
     res.status(500).send('Save fail');
   }
 };
+
+export const checkAdmin = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  const info = await getDocData('admins', email);
+  if (info) {
+    res.send(info);
+  } else {
+    res.status(500).send('Save fail');
+  }
+};
