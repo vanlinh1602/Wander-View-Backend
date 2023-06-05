@@ -28,8 +28,17 @@ export const addReview = async (req: Request, res: Response) => {
     { merge: true }
   );
 
+  const postReview: CustomObject<{ rating: number }> = await getDocData('reviews', postId);
+
+  let postRating = 0;
+  Object.entries(postReview ?? {}).forEach(([_id, { rating }]) => {
+    postRating += rating;
+  });
+  postRating /= Object.values(postReview).length;
+
   if (created) {
-    res.status(200).send(cmtId);
+    updateDocData('locations', postId, { rating: postRating }, { merge: true });
+    res.status(200).send({ cmtId, postRating: postRating.toString() });
   } else {
     res.status(500).send('Add fail');
   }
@@ -38,7 +47,9 @@ export const addReview = async (req: Request, res: Response) => {
 export const addLocation = async (req: Request, res: Response) => {
   const { data } = req.body;
 
-  const added = await createDocData({ ...data, id: getUid() }, 'locations', data.id, {
+  const id = getUid();
+
+  const added = await createDocData({ ...data, id }, 'locations', id, {
     merge: true,
   });
 
