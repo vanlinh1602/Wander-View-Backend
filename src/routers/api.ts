@@ -1,4 +1,10 @@
-import { addLocation, addReview, getLocations, getReviews } from 'controllers/loaction';
+import {
+  addLocation,
+  addReview,
+  getLocations,
+  getReviews,
+  removeReview,
+} from 'controllers/loaction';
 import { checkAdmin, getUser, updatePlan, updateUser, updateUserSave } from 'controllers/users';
 import express from 'express';
 
@@ -11,6 +17,7 @@ router.post('/checkAdmin', checkAdmin);
 
 router.post('/getLocations', getLocations);
 router.post('/addReview', addReview);
+router.post('/removeReview', removeReview);
 router.post('/getReviews', getReviews);
 router.post('/addLocation', addLocation);
 

@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import { createDocData, getCollection, getDocData, updateDocData } from 'lib/firestore';
 import { getUid } from 'lib/utils';
+import _ from 'lodash';
 
 export const getLocations = async (req: Request, res: Response) => {
   const locations = await getCollection('locations');
@@ -39,6 +40,22 @@ export const addReview = async (req: Request, res: Response) => {
   if (created) {
     updateDocData('locations', postId, { rating: postRating }, { merge: true });
     res.status(200).send({ cmtId, postRating: postRating.toString() });
+  } else {
+    res.status(500).send('Add fail');
+  }
+};
+
+export const removeReview = async (req: Request, res: Response) => {
+  const { id, postId } = req.body;
+  const reviews = await getDocData('reviews', postId);
+
+  const dataUpdate = _.cloneDeep(reviews);
+  _.unset(dataUpdate, id);
+
+  const updated = await updateDocData('reviews', postId, dataUpdate, { merge: false });
+
+  if (updated) {
+    res.status(200).send(true);
   } else {
     res.status(500).send('Add fail');
   }
