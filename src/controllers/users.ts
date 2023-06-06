@@ -84,3 +84,24 @@ export const checkAdmin = async (req: Request, res: Response) => {
     res.status(500).send('Save fail');
   }
 };
+
+export const updateNotify = async (req: Request, res: Response) => {
+  const { userId, data } = req.body;
+
+  const updated = await updateDocData(
+    'users',
+    userId,
+    {
+      notification: {
+        [data.id]: data,
+      },
+    },
+    { merge: true }
+  );
+
+  if (updated) {
+    res.send(true);
+  } else {
+    res.status(500).send('Something fail');
+  }
+};
