@@ -13,6 +13,7 @@ import {
   updateUser,
   updateUserSave,
 } from 'controllers/users';
+import { getWeather } from 'controllers/weather';
 import express from 'express';
 
 const router = express.Router();
@@ -28,5 +29,7 @@ router.post('/addReview', addReview);
 router.post('/removeReview', removeReview);
 router.post('/getReviews', getReviews);
 router.post('/addLocation', addLocation);
+
+router.post('/getWeather', getWeather);
 
 export default router;
