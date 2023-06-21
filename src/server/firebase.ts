@@ -1,10 +1,10 @@
-import admin, { app } from 'firebase-admin';
+import admin, { app, ServiceAccount } from 'firebase-admin';
 
-const serviceAccount = require('../configs/scenic_spots.json');
+import serviceAccount from '../configs/scenic_spots.json';
 
 export default (): app.App => {
   const firebase = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(serviceAccount as ServiceAccount),
   });
   return firebase;
 };
